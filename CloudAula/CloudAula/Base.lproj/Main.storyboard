@@ -88,9 +88,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="x9Z-3G-PEx">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="x9Z-3G-PEx">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="s1G-f1-guR" detailTextLabel="k2E-DR-aeE" style="IBUITableViewCellStyleValue1" id="VQ2-wU-ld0">
@@ -121,6 +120,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="x9Z-3G-PEx" firstAttribute="top" secondItem="GgW-9U-pw0" secondAttribute="top" id="Iha-iC-YeO"/>
+                            <constraint firstItem="x9Z-3G-PEx" firstAttribute="leading" secondItem="GgW-9U-pw0" secondAttribute="leading" id="itz-1L-I92"/>
+                            <constraint firstAttribute="bottom" secondItem="x9Z-3G-PEx" secondAttribute="bottom" id="kfJ-sU-5U1"/>
+                            <constraint firstAttribute="trailing" secondItem="x9Z-3G-PEx" secondAttribute="trailing" id="uO9-rd-BHU"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="nomeDoContato" id="WYi-I6-Ofp">
