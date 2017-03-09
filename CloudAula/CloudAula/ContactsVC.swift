@@ -13,12 +13,22 @@ class ContactsVC: UIViewController {
 
     @IBOutlet weak var personsTableView: UITableView!
     var contactSelected: Contact!
-    
+    var activityIndicator = UIActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
         personsTableView.delegate =  self
         personsTableView.dataSource = self
         
+        //Activity Indicator
+        activityIndicator.startAnimating()
+        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator.color = UIColor.black
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.center = view.center
+    //    activityIndicator.frame = CGRect(x: view.frame.size.width/2, y: view.frame.size.height/2, width: view.frame.size.width/2, height: view.frame.size.width/2)
+        view.addSubview(activityIndicator)
+        
+        //Cloud
         DAO().fetchContacts()
         
         
@@ -46,7 +56,7 @@ class ContactsVC: UIViewController {
             
             let ageTextField = alertController.textFields![1] as UITextField
             let age = ageTextField.text
-            print(name, age)
+            print(name!, age!)
             
             //salvar no cloud, notification pra reloadTableView
             
@@ -86,8 +96,10 @@ class ContactsVC: UIViewController {
     func actOnNotificationSuccessFetchContacts() {
         DispatchQueue.main.async {
             self.personsTableView.reloadData()
+            self.activityIndicator.stopAnimating()
         }
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ContactsToTelephone" {

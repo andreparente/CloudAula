@@ -38,7 +38,7 @@ class DAO {
                     
                     publicDatabase.save(record, completionHandler: { (record, error) -> Void in
                         if (error != nil) {
-                            print(error)
+                            print(error!)
                         }
                         else{
                             globalContacts.append(Contact(name: contact.name, idade: contact.idade))
@@ -81,7 +81,7 @@ class DAO {
                     contact.references.append(telephoneReference)
                     publicDatabase.save(record, completionHandler: { (record, error) -> Void in
                         if (error != nil) {
-                            print(error)
+                            print(error!)
                         }
                         else {
                             
@@ -105,6 +105,7 @@ class DAO {
                 print("o contato existe")
                 
                 //  print("---------------------- Referencia dos gastos: ", user.arrayGastos)
+           //     contact.references.append(telephoneReference)
                 fetchedRecord!.setObject(contact.references as CKRecordValue?, forKey: "telephones")
                 
                 container.publicCloudDatabase.save(fetchedRecord!, completionHandler: { (record, error) -> Void in
@@ -137,7 +138,7 @@ class DAO {
         
         publicDatabase.perform(query, inZoneWith: nil) { (results, error) -> Void in
             if error != nil {
-                print(error)
+                print(error!)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "notificationErrorInternet"), object: nil)
             }
             else {
@@ -179,7 +180,6 @@ class DAO {
                 if let teste = fetchedRecord!.object(forKey: "telephones") as? [CKReference] {
                     print("quantidade de telefones registrados: ", teste.count)
                     
-                    
                     for telReference in teste {
                         telephonesRecordIds.append(telReference.recordID)
                     }
@@ -209,6 +209,10 @@ class DAO {
                     }
                     
                     CKContainer.default().publicCloudDatabase.add(fetchOperation)
+                }
+                else {
+                    //Não existe nenhum telefone cadastrado. Ok
+                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "notificationSuccessFetchTelephones"), object: nil)
                 }
             }
         }

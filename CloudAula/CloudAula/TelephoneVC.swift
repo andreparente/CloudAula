@@ -13,14 +13,23 @@ class TelephoneVC: UIViewController {
 
     var contact: Contact!
     //indice 
-    
+    var activityIndicator = UIActivityIndicatorView()
     @IBOutlet weak var telephonesTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = contact.name
         telephonesTableView.delegate = self
         telephonesTableView.dataSource = self
+        //Activity Indicator
+        activityIndicator.startAnimating()
+        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator.color = UIColor.black
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.center = view.center
+        view.addSubview(activityIndicator)
         
+        
+        //Cloud
         DAO().fetchTelephonesFromContact(contact: contact)
         
         NotificationCenter.default.addObserver(self, selector: #selector(TelephoneVC.actOnNotificationSuccessFetchTelephones), name: NSNotification.Name(rawValue: "notificationSuccessFetchTelephones"), object: nil)
@@ -45,7 +54,7 @@ class TelephoneVC: UIViewController {
     func actOnNotificationSuccessFetchTelephones() {
         DispatchQueue.main.async {
             self.telephonesTableView.reloadData()
-            
+            self.activityIndicator.stopAnimating()
         }
     }
     /*
