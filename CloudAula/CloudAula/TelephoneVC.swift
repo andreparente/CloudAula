@@ -65,8 +65,8 @@ class TelephoneVC: UIViewController {
         let saveAction = UIAlertAction(title: "Save", style: .default, handler: {
             alert -> Void in
             
-            let telephoneTextField = alertController.textFields![0] as UITextField
-            let typeTextField = alertController.textFields![1] as UITextField
+            let telephoneTextField = alertController.textFields![1] as UITextField
+            let typeTextField = alertController.textFields![0] as UITextField
             
             print("telephone \(telephoneTextField.text), type \(typeTextField.text)")
             let telephone = TelephoneNumber(type: typeTextField.text!, number: Int(telephoneTextField.text!)!)
@@ -81,11 +81,11 @@ class TelephoneVC: UIViewController {
         })
         
         alertController.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Enter telephone"
-            textField.keyboardType = .numberPad
+            textField.placeholder = "Enter type"
         }
         alertController.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Enter type"
+            textField.keyboardType = .numberPad
+            textField.placeholder = "Enter telephone"
         }
         
         alertController.addAction(saveAction)
@@ -126,6 +126,7 @@ extension TelephoneVC: UITableViewDelegate, UITableViewDataSource {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
             // handle delete (by removing the data from your array and updating the tableview)
             //deletar telefone
+            DAO().deleteTelephone(telephoneToDelete: contact.references[indexPath.row], contact: contact, index: indexPath.row)
         }
         
     }

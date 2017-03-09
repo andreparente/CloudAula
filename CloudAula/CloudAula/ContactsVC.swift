@@ -117,6 +117,8 @@ extension ContactsVC: UITableViewDelegate, UITableViewDataSource {
         
         if globalContacts.count != 0 {
             cell.textLabel?.text = globalContacts[indexPath.row].name
+            cell.detailTextLabel?.text = "Age: " + String(globalContacts[indexPath.row].idade)
+            
         } else {
             cell.textLabel?.text = "Não há ninguém cadastrado!"
         }

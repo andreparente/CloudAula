@@ -12,9 +12,8 @@ import CloudKit
 class DAO {
     
     
-    func addContact(contact: Contact)
+    func addContact(contact: Contact) {
         
-    {
         let recordId = CKRecordID(recordName: contact.name)
         let record = CKRecord(recordType: "Contact", recordID: recordId)
         let container = CKContainer.default()
@@ -51,8 +50,8 @@ class DAO {
         }
     }
     
-    func addTelephone(telephone: TelephoneNumber, contact: Contact)
-    {
+    func addTelephone(telephone: TelephoneNumber, contact: Contact) {
+        
         let recordId = CKRecordID(recordName: String(telephone.number))
         let record = CKRecord(recordType: "Telephone")
         let container = CKContainer.default()
@@ -77,7 +76,7 @@ class DAO {
                     print("primeira vez que ta criando o telefone")
                     record.setObject(telephone.number as CKRecordValue?, forKey: "number")
                     record.setObject(telephone.type as CKRecordValue?, forKey: "type")
-                    let telephoneReference = CKReference(recordID: recordId, action: .deleteSelf)
+                    let telephoneReference = CKReference(recordID: record.recordID, action: .none)
                     
                     contact.references.append(telephoneReference)
                     publicDatabase.save(record, completionHandler: { (record, error) -> Void in
@@ -149,6 +148,7 @@ class DAO {
                     if let teste = result.object(forKey: "telephones") as? [CKReference] {
                         for telReference in teste {
                             newContact.references.append(telReference)
+                            print(telReference)
                         }
                         globalContacts.append(newContact)
                         
@@ -176,17 +176,18 @@ class DAO {
             
             if error == nil {
                 
-                if let teste = fetchedRecord!.object(forKey: "telephones") {
-                    print("quantidade de telefones registrados: ", (teste as! [CKRecordValue]).count)
+                if let teste = fetchedRecord!.object(forKey: "telephones") as? [CKReference] {
+                    print("quantidade de telefones registrados: ", teste.count)
                     
                     
-                    for telReference in fetchedRecord!.object(forKey: "telephones") as! [CKReference] {
+                    for telReference in teste {
                         telephonesRecordIds.append(telReference.recordID)
                     }
                     
                     let fetchOperation = CKFetchRecordsOperation(recordIDs: telephonesRecordIds)
                     fetchOperation.fetchRecordsCompletionBlock = {
                         records, error in
+                      //  print("RECORDS ", records)
                         if error != nil {
                             print(error!)
                             
@@ -200,14 +201,14 @@ class DAO {
                                 
                                 let telephone = TelephoneNumber(type: result.value(forKey: "type") as! String, number: result.value(forKey: "number") as! Int)
                                 contact.addTelephone(telephone: telephone)
-                                contact.references.append(CKReference(recordID: result.recordID, action: .deleteSelf))
+                                contact.references.append(CKReference(recordID: result.recordID, action: .none))
                                 print(telephone.number, telephone.type)
                             }
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "notificationSuccessFetchTelephones"), object: nil)
                         }
                     }
                     
-                    CKContainer.default().privateCloudDatabase.add(fetchOperation)
+                    CKContainer.default().publicCloudDatabase.add(fetchOperation)
                 }
             }
         }
@@ -240,6 +241,44 @@ class DAO {
                 // NSNotificationCenter.defaultCenter().postNotificationName("notificationSucessGetId", object: nil)
             }
         }
+    }
+    
+    func deleteTelephone(telephoneToDelete: CKReference, contact: Contact, index: Int) {
+        
+        print("NOME DO CONTATO QUE TA SENDO DELETADO  ", contact.name)
+        let contactRecordId = CKRecordID(recordName: contact.name)
+        
+        let container = CKContainer.default()
+        let publicDatabase = container.publicCloudDatabase
+        
+        publicDatabase.delete(withRecordID: telephoneToDelete.recordID,completionHandler:
+            ({returnRecord, error in
+                if error != nil {
+                    print(error!)
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "notificationDeleteError"), object: nil)
+                }
+            }))
+        contact.references.remove(at: index)
+        contact.telephones.remove(at: index)
+        container.publicCloudDatabase.fetch(withRecordID: contactRecordId) {
+            (fetchedRecord,error) in
+            print(fetchedRecord!)
+            
+            if error == nil {
+                print("---------------------- Referencia dos telefones atualizadas: ", contact.references)
+                fetchedRecord!.setObject(contact.references as CKRecordValue?, forKey: "telephones")
+                
+                container.publicCloudDatabase.save(fetchedRecord!, completionHandler: { (record, error) -> Void in
+                    if (error != nil) {
+                        print(error!)
+                    }
+                })
+            }
+        }
+    }
+    
+    func deleteContact(contact: Contact) {
+        
     }
     
 }
