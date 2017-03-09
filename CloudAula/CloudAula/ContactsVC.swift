@@ -56,11 +56,13 @@ class ContactsVC: UIViewController {
             
             let ageTextField = alertController.textFields![1] as UITextField
             let age = ageTextField.text
+            
+            if  name != "" && age != "" {
             print(name!, age!)
             
-            //salvar no cloud, notification pra reloadTableView
-            
+            //Salvar no cloud
             DAO().addContact(contact: Contact(name: name!, idade: Int(age!)!))
+            }
             
         })
         
