@@ -277,8 +277,42 @@ class DAO {
         }
     }
     
-    func deleteContact(contact: Contact) {
+    func deleteContact(contact: Contact, index: Int) {
         
+        print("NOME DO CONTATO QUE TA SENDO DELETADO  ", contact.name)
+        let contactRecordId = CKRecordID(recordName: contact.name)
+        
+        let container = CKContainer.default()
+        let publicDatabase = container.publicCloudDatabase
+        
+        publicDatabase.delete(withRecordID: contactRecordId,completionHandler:
+            ({returnRecord, error in
+                if error != nil {
+                    print(error!)
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "notificationDeleteError"), object: nil)
+                } else {
+                    print("Deu certo")
+                    globalContacts.remove(at: index)
+                }
+            }))
+        
+
+//        container.publicCloudDatabase.fetch(withRecordID: contactRecordId) {
+//            (fetchedRecord,error) in
+//            print(fetchedRecord!)
+//            
+//            if error == nil {
+//                print("---------------------- contatos que sobraram: ", globalContacts)
+//                fetchedRecord!.setObject(contact.references as CKRecordValue?, forKey: "telephones")
+//                
+//                container.publicCloudDatabase.save(fetchedRecord!, completionHandler: { (record, error) -> Void in
+//                    if (error != nil) {
+//                        print(error!)
+//                    }
+//                })
+//            }
+//        }
+
     }
     
 }

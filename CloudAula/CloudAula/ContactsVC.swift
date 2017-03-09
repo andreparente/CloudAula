@@ -138,6 +138,7 @@ extension ContactsVC: UITableViewDelegate, UITableViewDataSource {
             if (editingStyle == UITableViewCellEditingStyle.delete) {
                 // handle delete (by removing the data from your array and updating the tableview)
                 //deletar pessoa
+                DAO().deleteContact(contact: globalContacts[indexPath.row], index: indexPath.row)
             }
         
     }
