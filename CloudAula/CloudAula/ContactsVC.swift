@@ -19,6 +19,7 @@ class ContactsVC: UIViewController {
         personsTableView.delegate =  self
         personsTableView.dataSource = self
         
+        self.navigationItem.title = "Contacts"
         //Activity Indicator
         activityIndicator.startAnimating()
         activityIndicator.activityIndicatorViewStyle = .whiteLarge
