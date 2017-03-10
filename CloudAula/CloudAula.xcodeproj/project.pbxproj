@@ -16,23 +16,23 @@
 		8AE0C8A91E4262AE0027CA65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AE0C8A81E4262AE0027CA65 /* Assets.xcassets */; };
 		8AE0C8AC1E4262AE0027CA65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AE0C8AA1E4262AE0027CA65 /* LaunchScreen.storyboard */; };
 		8AE0C8B91E42653E0027CA65 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0C8B81E42653E0027CA65 /* Contact.swift */; };
-		8AE0C8BB1E42656B0027CA65 /* TelephoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0C8BA1E42656B0027CA65 /* TelephoneNumber.swift */; };
+		8AE0C8BB1E42656B0027CA65 /* Telephone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0C8BA1E42656B0027CA65 /* Telephone.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8A1146401E6EEEF700F63613 /* TelephoneVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelephoneVC.swift; sourceTree = "<group>"; };
-		8A1146421E6F984F00F63613 /* DAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
+		8A1146421E6F984F00F63613 /* DAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DAO.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8A1146441E6F9E7B00F63613 /* CloudAula.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CloudAula.entitlements; sourceTree = "<group>"; };
 		8A1146451E6F9E8200F63613 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		8AE0C89E1E4262AE0027CA65 /* CloudAula.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudAula.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AE0C8A11E4262AE0027CA65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8AE0C8A31E4262AE0027CA65 /* ContactsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsVC.swift; sourceTree = "<group>"; };
+		8AE0C8A31E4262AE0027CA65 /* ContactsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ContactsVC.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8AE0C8A61E4262AE0027CA65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8AE0C8A81E4262AE0027CA65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8AE0C8AB1E4262AE0027CA65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8AE0C8AD1E4262AE0027CA65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AE0C8B81E42653E0027CA65 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
-		8AE0C8BA1E42656B0027CA65 /* TelephoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelephoneNumber.swift; sourceTree = "<group>"; };
+		8AE0C8BA1E42656B0027CA65 /* Telephone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Telephone.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +47,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A5665D41E73221300E1A58B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8A1146421E6F984F00F63613 /* DAO.swift */,
+				8AE0C8B81E42653E0027CA65 /* Contact.swift */,
+				8AE0C8BA1E42656B0027CA65 /* Telephone.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		8A5665D61E73222900E1A58B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8AE0C8A51E4262AE0027CA65 /* Main.storyboard */,
+				8AE0C8AA1E4262AE0027CA65 /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		8A5665D71E73223200E1A58B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8AE0C8A11E4262AE0027CA65 /* AppDelegate.swift */,
+				8A1146401E6EEEF700F63613 /* TelephoneVC.swift */,
+				8AE0C8A31E4262AE0027CA65 /* ContactsVC.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		8AE0C8951E4262AE0027CA65 = {
 			isa = PBXGroup;
 			children = (
@@ -67,17 +96,12 @@
 		8AE0C8A01E4262AE0027CA65 /* CloudAula */ = {
 			isa = PBXGroup;
 			children = (
+				8A5665D41E73221300E1A58B /* Model */,
+				8A5665D61E73222900E1A58B /* View */,
+				8A5665D71E73223200E1A58B /* Controller */,
 				8A1146441E6F9E7B00F63613 /* CloudAula.entitlements */,
-				8AE0C8A11E4262AE0027CA65 /* AppDelegate.swift */,
-				8AE0C8A31E4262AE0027CA65 /* ContactsVC.swift */,
-				8A1146401E6EEEF700F63613 /* TelephoneVC.swift */,
-				8AE0C8A51E4262AE0027CA65 /* Main.storyboard */,
 				8AE0C8A81E4262AE0027CA65 /* Assets.xcassets */,
-				8AE0C8AA1E4262AE0027CA65 /* LaunchScreen.storyboard */,
 				8AE0C8AD1E4262AE0027CA65 /* Info.plist */,
-				8AE0C8B81E42653E0027CA65 /* Contact.swift */,
-				8AE0C8BA1E42656B0027CA65 /* TelephoneNumber.swift */,
-				8A1146421E6F984F00F63613 /* DAO.swift */,
 			);
 			path = CloudAula;
 			sourceTree = "<group>";
@@ -175,7 +199,7 @@
 				8AE0C8B91E42653E0027CA65 /* Contact.swift in Sources */,
 				8AE0C8A41E4262AE0027CA65 /* ContactsVC.swift in Sources */,
 				8A1146411E6EEEF700F63613 /* TelephoneVC.swift in Sources */,
-				8AE0C8BB1E42656B0027CA65 /* TelephoneNumber.swift in Sources */,
+				8AE0C8BB1E42656B0027CA65 /* Telephone.swift in Sources */,
 				8AE0C8A21E4262AE0027CA65 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

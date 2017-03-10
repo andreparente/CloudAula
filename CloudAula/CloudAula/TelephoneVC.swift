@@ -80,7 +80,7 @@ class TelephoneVC: UIViewController {
             if telephoneTextField.text != "" && typeTextField.text != "" {
             if telephoneTextField.text != nil && typeTextField.text != nil {
             print("telephone \(telephoneTextField.text), type \(typeTextField.text)")
-            let telephone = TelephoneNumber(type: typeTextField.text!, number: Int(telephoneTextField.text!)!)
+            let telephone = Telephone(type: typeTextField.text!, number: Int(telephoneTextField.text!)!)
             //salvar no cloud e notification pra recarregar tableView
             DAO().addTelephone(telephone: telephone, contact: self.contact)
             }

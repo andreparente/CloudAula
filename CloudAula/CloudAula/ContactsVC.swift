@@ -62,7 +62,7 @@ class ContactsVC: UIViewController {
             print(name!, age!)
             
             //Salvar no cloud
-            DAO().addContact(contact: Contact(name: name!, idade: Int(age!)!))
+            DAO().saveContact(contact: Contact(name: name!, idade: Int(age!)!))
             }
             
         })

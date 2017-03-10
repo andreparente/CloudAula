@@ -14,20 +14,20 @@ var globalContacts: [Contact] = []
 class Contact: NSObject {
     var name: String!
     var idade: Int!
-    var telephones: [TelephoneNumber] = []
+    var telephones: [Telephone] = []
     var references: [CKReference] = []
     init(name: String, idade: Int) {
         self.name = name
         self.idade = idade
     }
     
-    init(name: String, idade: Int, telephones: [TelephoneNumber]) {
+    init(name: String, idade: Int, telephones: [Telephone]) {
         self.name = name
         self.idade = idade
         self.telephones = telephones
     }
     
-    func addTelephone(telephone: TelephoneNumber) {
+    func addTelephone(telephone: Telephone) {
         self.telephones.append(telephone)
     }
 }
