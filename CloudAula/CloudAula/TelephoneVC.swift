@@ -140,6 +140,7 @@ extension TelephoneVC: UITableViewDelegate, UITableViewDataSource {
             // handle delete (by removing the data from your array and updating the tableview)
             //deletar telefone
             DAO().deleteTelephone(telephoneToDelete: contact.references[indexPath.row], contact: contact, index: indexPath.row)
+            telephonesTableView.reloadData()
         }
         
     }

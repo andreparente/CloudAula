@@ -76,7 +76,7 @@ class DAO {
                     print("primeira vez que ta criando o telefone")
                     record.setObject(telephone.number as CKRecordValue?, forKey: "number")
                     record.setObject(telephone.type as CKRecordValue?, forKey: "type")
-                    let telephoneReference = CKReference(recordID: record.recordID, action: .none)
+                    let telephoneReference = CKReference(recordID: record.recordID, action: .deleteSelf)
                     
                     contact.references.append(telephoneReference)
                     publicDatabase.save(record, completionHandler: { (record, error) -> Void in
@@ -201,7 +201,7 @@ class DAO {
                                 
                                 let telephone = TelephoneNumber(type: result.value(forKey: "type") as! String, number: result.value(forKey: "number") as! Int)
                                 contact.addTelephone(telephone: telephone)
-                                contact.references.append(CKReference(recordID: result.recordID, action: .none))
+                                contact.references.append(CKReference(recordID: result.recordID, action: .deleteSelf))
                                 print(telephone.number, telephone.type)
                             }
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "notificationSuccessFetchTelephones"), object: nil)
