@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TelephoneNumber: NSObject {
+class Telephone: NSObject {
     var type: String!
     var number: Int!
     
