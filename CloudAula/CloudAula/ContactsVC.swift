@@ -18,6 +18,7 @@ class ContactsVC: UIViewController {
         super.viewDidLoad()
         personsTableView.delegate =  self
         personsTableView.dataSource = self
+        print("original height:   ", self.navigationController?.navigationBar.frame.height, self.navigationController?.navigationBar.frame.maxY)
         
         self.navigationItem.title = "Contacts"
         //Activity Indicator
@@ -147,16 +148,5 @@ extension ContactsVC: UITableViewDelegate, UITableViewDataSource {
         self.performSegue(withIdentifier: "ContactsToTelephone", sender: self)
         
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-
-            if (editingStyle == UITableViewCellEditingStyle.delete) {
-                // handle delete (by removing the data from your array and updating the tableview)
-                //deletar pessoa
-                DAO().deleteContact(contact: globalContacts[indexPath.row], index: indexPath.row)
-            }
-        
-    }
-
 }
 
