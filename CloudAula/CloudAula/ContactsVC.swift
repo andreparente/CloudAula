@@ -21,23 +21,24 @@ class ContactsVC: UIViewController {
         print("original height:   ", self.navigationController?.navigationBar.frame.height, self.navigationController?.navigationBar.frame.maxY)
         
         self.navigationItem.title = "Contacts"
+      
         //Activity Indicator
-        activityIndicator.startAnimating()
-        activityIndicator.activityIndicatorViewStyle = .whiteLarge
-        activityIndicator.color = UIColor.black
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.center = view.center
-    //    activityIndicator.frame = CGRect(x: view.frame.size.width/2, y: view.frame.size.height/2, width: view.frame.size.width/2, height: view.frame.size.width/2)
-        view.addSubview(activityIndicator)
-        
-        //Cloud
-        DAO().fetchContacts()
-        
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(ContactsVC.actOnNotificationSuccessFetchContacts), name: NSNotification.Name(rawValue: "notificationSuccessFetchContacts"), object: nil)
-
-        NotificationCenter.default.addObserver(self, selector: #selector(ContactsVC.actOnNotificationSuccessCadastroContacts), name: NSNotification.Name(rawValue: "notificationSuccessCadastroContacts"), object: nil)
-        // Do any additional setup after loading the view, typically from a nib.
+//        activityIndicator.startAnimating()
+//        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+//        activityIndicator.color = UIColor.black
+//        activityIndicator.hidesWhenStopped = true
+//        activityIndicator.center = view.center
+//    //    activityIndicator.frame = CGRect(x: view.frame.size.width/2, y: view.frame.size.height/2, width: view.frame.size.width/2, height: view.frame.size.width/2)
+//        view.addSubview(activityIndicator)
+//        
+//        //Cloud
+//        DAO().fetchContacts()
+//        
+//        
+//        NotificationCenter.default.addObserver(self, selector: #selector(ContactsVC.actOnNotificationSuccessFetchContacts), name: NSNotification.Name(rawValue: "notificationSuccessFetchContacts"), object: nil)
+//
+         NotificationCenter.default.addObserver(self, selector: #selector(ContactsVC.actOnNotificationSuccessCadastroContacts), name: NSNotification.Name(rawValue: "notificationSuccessCadastroContacts"), object: nil)
+//        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,9 +93,11 @@ class ContactsVC: UIViewController {
     }
     
     func actOnNotificationSuccessCadastroContacts() {
+        
         DispatchQueue.main.async {
             self.personsTableView.reloadData()
         }
+        
     }
     
     func actOnNotificationSuccessFetchContacts() {

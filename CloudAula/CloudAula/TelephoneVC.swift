@@ -10,9 +10,9 @@ import UIKit
 import CloudKit
 
 class TelephoneVC: UIViewController {
-
+    
     var contact: Contact!
-    //indice 
+    //indice
     var activityIndicator = UIActivityIndicatorView()
     @IBOutlet weak var telephonesTableView: UITableView!
     override func viewDidLoad() {
@@ -21,52 +21,56 @@ class TelephoneVC: UIViewController {
         telephonesTableView.delegate = self
         telephonesTableView.dataSource = self
         //Activity Indicator
-        activityIndicator.startAnimating()
-        activityIndicator.activityIndicatorViewStyle = .whiteLarge
-        activityIndicator.color = UIColor.black
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.center = view.center
-        view.addSubview(activityIndicator)
         
-        
-        //Cloud
-        DAO().fetchTelephonesFromContact(contact: contact)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(TelephoneVC.actOnNotificationSuccessFetchTelephones), name: NSNotification.Name(rawValue: "notificationSuccessFetchTelephones"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(TelephoneVC.actOnNotificationSuccessCadastroTelephone), name: NSNotification.Name(rawValue: "notificationSuccessCadastroTelephone"), object: nil)
-        // Do any additional setup after loading the view.
-        //adicionar a cloud
+        //        if contact.telephones.count == 0 {
+        //            //Cloud
+        //            activityIndicator.startAnimating()
+        //            activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        //            activityIndicator.color = UIColor.black
+        //            activityIndicator.hidesWhenStopped = true
+        //            activityIndicator.center = view.center
+        //            view.addSubview(activityIndicator)
+        //
+        //            DAO().fetchTelephonesFromContact(contact: contact)
+        //        } else {
+        //        }
+        //
+        //        NotificationCenter.default.addObserver(self, selector: #selector(TelephoneVC.actOnNotificationSuccessFetchTelephones), name: NSNotification.Name(rawValue: "notificationSuccessFetchTelephones"), object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(TelephoneVC.actOnNotificationSuccessCadastroTelephone), name: NSNotification.Name(rawValue: "notificationSuccessCadastroTelephone"), object: nil)
+        //        // Do any additional setup after loading the view.
+        //        //adicionar a cloud
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    func actOnNotificationSuccessCadastroTelephone() {
-        DispatchQueue.main.async {
-            self.telephonesTableView.reloadData()
-
-        }
-    }
     
-    func actOnNotificationSuccessFetchTelephones() {
-        DispatchQueue.main.async {
-            self.telephonesTableView.reloadData()
-            self.activityIndicator.stopAnimating()
-        }
-    }
+    //    func actOnNotificationSuccessCadastroTelephone() {
+    //        DispatchQueue.main.async {
+    //            self.telephonesTableView.reloadData()
+    //
+    //        }
+    //    }
+    //
+    //    func actOnNotificationSuccessFetchTelephones() {
+    //        DispatchQueue.main.async {
+    //            self.telephonesTableView.reloadData()
+    //            self.activityIndicator.stopAnimating()
+    //        }
+    //    }
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
     @IBAction func addTelephone(_ sender: UIBarButtonItem) {
         //adicionar telefone
         let alertController = UIAlertController(title: "Add New Telephone", message: "", preferredStyle: .alert)
@@ -78,12 +82,12 @@ class TelephoneVC: UIViewController {
             let typeTextField = alertController.textFields![0] as UITextField
             
             if telephoneTextField.text != "" && typeTextField.text != "" {
-            if telephoneTextField.text != nil && typeTextField.text != nil {
-            print("telephone \(telephoneTextField.text), type \(typeTextField.text)")
-            let telephone = Telephone(type: typeTextField.text!, number: Int(telephoneTextField.text!)!)
-            //salvar no cloud e notification pra recarregar tableView
-            DAO().addTelephone(telephone: telephone, contact: self.contact)
-            }
+                if telephoneTextField.text != nil && typeTextField.text != nil {
+                    print("telephone \(telephoneTextField.text), type \(typeTextField.text)")
+                    let telephone = Telephone(type: typeTextField.text!, number: Int(telephoneTextField.text!)!)
+                    //salvar no cloud e notification pra recarregar tableView
+                    //   DAO().addTelephone(telephone: telephone, contact: self.contact)
+                }
             }
             
         })
@@ -139,7 +143,8 @@ extension TelephoneVC: UITableViewDelegate, UITableViewDataSource {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
             // handle delete (by removing the data from your array and updating the tableview)
             //deletar telefone
-            DAO().deleteTelephone(telephoneToDelete: contact.references[indexPath.row], contact: contact, index: indexPath.row)
+          //  DAO().deleteTelephone(telephoneToDelete: contact.references[indexPath.row], contact: contact, index: indexPath.row)
+            contact.references.remove(at: indexPath.row)
             telephonesTableView.reloadData()
         }
         

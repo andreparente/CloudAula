@@ -99,6 +99,7 @@ class DAO {
                     let telephoneReference = CKReference(recordID: record.recordID, action: .deleteSelf)
                     
                     contact.references.append(telephoneReference)
+                    
                     publicDatabase.save(record, completionHandler: { (record, error) -> Void in
                         if (error != nil) {
                             print(error!)
@@ -161,6 +162,7 @@ class DAO {
         
         //esse bloco será executado. ou seja, performQuery.
         publicDatabase.perform(query, inZoneWith: nil) { (results, error) -> Void in
+            
             if error != nil {
                 print(error!)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "notificationErrorInternet"), object: nil)
@@ -173,7 +175,7 @@ class DAO {
                 //loop nos resultados da query
                 for result in results! {
                     
-                    //aqui ja instancio o novo contato com o result.value, ele puxa os dados de um result e nós fazemos a conversão para os tipos que queremos.
+                    //aqui ja instancsio o novo contato com o result.value, ele puxa os dados de um result e nós fazemos a conversão para os tipos que queremos.
                     let newContact = Contact(name: result.value(forKey: "name") as! String, idade: result.value(forKey: "age") as! Int)
                     
                     //aqui eu vejo se o usuário tem alguma referencia/telefone.
